@@ -62,7 +62,7 @@ const server = async () => {
   try {
     await connection();
     app.listen(process.env.PORT, () => {
-      console.log(`Server running on port ${process.env.PORT}`);
+      console.log(`Server running on port ${port}`);
     });
   } catch (error) {
     console.error("Error starting server:", error);
