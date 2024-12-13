@@ -70,3 +70,5 @@ const server = async () => {
 };
 
 server();
+
+export default app
