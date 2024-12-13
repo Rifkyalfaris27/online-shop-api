@@ -39,8 +39,8 @@ app.use(
     }),
     cookie: {
       maxAge: 14 * 24 * 60 * 60 * 1000, // expires after 14 days
-      httpOnly: true, // secure: true if using HTTPS
-      secure: false, // change to true if using https
+      httpOnly: false, // secure: true if using HTTPS
+      secure: true, // change to true if using https
     },
   })
 );
