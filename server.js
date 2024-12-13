@@ -56,6 +56,8 @@ app.use("/api/user", UserRoutes);
 app.use("/api/admin", AdminRoutes);
 app.use("/api/chart", ChartRoutes);
 
+const port = process.env.PORT || 4000;
+
 const server = async () => {
   try {
     await connection();
