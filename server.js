@@ -1,5 +1,12 @@
 import dotenv from "dotenv";
 dotenv.config();
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+// Mendapatkan __dirname di ES Module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 import express from "express";
 import cors from "cors";
@@ -16,16 +23,16 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors());
+// app.use(cors());
 
-// app.use(
-//   cors({
-//     origin: "http://localhost:5173",
-//     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-//     allowedHeaders: ["Content-Type"],
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type"],
+    credentials: true,
+  })
+);
 
 app.use(
   session({
@@ -41,11 +48,13 @@ app.use(
     }),
     cookie: {
       maxAge: 14 * 24 * 60 * 60 * 1000, // expires after 14 days
-      httpOnly: false, // secure: true if using HTTPS
-      secure: true, // change to true if using https
+      httpOnly: true, // secure: true if using HTTPS
+      secure: false, // change to true if using https
     },
   })
 );
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.get("/", (req, res) => {
   res.send("Hello, Worlsd!");
@@ -71,4 +80,4 @@ const server = async () => {
 
 server();
 
-export default app
+export default app;
